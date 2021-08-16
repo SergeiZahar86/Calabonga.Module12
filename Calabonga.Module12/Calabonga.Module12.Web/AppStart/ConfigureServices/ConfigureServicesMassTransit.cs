@@ -43,6 +43,8 @@ namespace Calabonga.Module12.Web.AppStart.ConfigureServices
                     cfg.UseRawJsonSerializer();
                     cfg.UseHealthCheck(context);
                     cfg.ConfigureEndpoints(context, SnakeCaseEndpointNameFormatter.Instance);
+
+                    // регистрация класса подписчика
                     cfg.ReceiveEndpoint(Constants.NotificationQueueNameWarehouse, e =>
                     {
                         e.Consumer<ApplicationUserCreatedConsumer>();

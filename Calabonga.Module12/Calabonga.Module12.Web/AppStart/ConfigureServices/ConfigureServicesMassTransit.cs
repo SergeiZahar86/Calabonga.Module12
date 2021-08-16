@@ -45,11 +45,15 @@ namespace Calabonga.Module12.Web.AppStart.ConfigureServices
                     cfg.ConfigureEndpoints(context, SnakeCaseEndpointNameFormatter.Instance);
 
                     // регистрация класса подписчика
-                    cfg.ReceiveEndpoint(Constants.NotificationQueueNameWarehouse, e =>
-                    {
-                        e.Consumer<ApplicationUserCreatedConsumer>();
-                    });
+                    //cfg.ReceiveEndpoint(Constants.NotificationQueueNameWarehouse, e =>
+                    //{
+                    //    e.Consumer<ApplicationUserCreatedConsumer>();
+                    //});
                 });
+
+                // регистрация классов подписчиков c конструктором
+                x.AddConsumer<ApplicationUserCreatedConsumer>(typeof(ApplicationUserCreatedConsumerDefinition));
+
             });
 
             services.AddMassTransitHostedService();
